@@ -1,11 +1,11 @@
-To architect your **Multimodal Data Quality Infrastructure Platform** (as detailed in the design document you shared), focus on creating a system that is **production-grade from day one**, even as an MVP. It must handle enterprise expectations: high throughput (10M+ documents/month eventually), strict quality gates, HIPAA-like compliance in healthcare, low-latency scoring (<50 ms p99), horizontal scalability, strong observability, and a clear path to evolve into legal/financial verticals.
+To architect **Multimodal Data Quality Infrastructure Platform** (as detailed in the design document shared), focus on creating a system that is **production-grade from day one**, even as an MVP. It must handle enterprise expectations: high throughput (10M+ documents/month eventually), strict quality gates, HIPAA-like compliance in healthcare, low-latency scoring (<50 ms p99), horizontal scalability, strong observability, and a clear path to evolve into legal/financial verticals.
 
 The provided design doc already gives an excellent foundation (quality-first pipeline, fail-fast, idempotency, domain-driven separation, Temporal for durable workflows, multi-tenant Postgres + Qdrant/Weaviate vector store). Below is how to **turn that into a coherent, modern, 2026-era architecture** — practical, scalable, maintainable, and aligned with current best practices in multimodal RAG-adjacent systems, intelligent document processing, and data quality/governance pipelines.
 
-### Core Architectural Philosophy (2026 Lens)
+### Core Architectural Philosophy
 Adopt these guiding principles, drawn from production multimodal RAG & document AI patterns in 2025–2026:
 
-1. **Upstream Quality Gate / “Refinery” mindset** — Your system sits **before** the RAG/vector store consumers. Nothing bad reaches downstream (fail-fast + quality scoring at every stage).
+1. **Upstream Quality Gate / “Refinery” mindset** — system sits **before** the RAG/vector store consumers. Nothing bad reaches downstream (fail-fast + quality scoring at every stage).
 2. **Event-driven + Orchestrated Microservices** — Decouple ingestion from heavy quality processing from indexing.
 3. **Hybrid Batch + Near-Real-Time** — Support both bulk uploads (S3 paths) and streaming/low-latency single docs.
 4. **Governance & Lineage as First-Class Citizens** — Audit logs, quality metadata, provenance tracking, and feedback → training flywheel are not add-ons.
